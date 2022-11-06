@@ -11,13 +11,40 @@ else
 {
   if(isset($_POST['update']))
   {
-$form_id=$_GET['form_id'];
-$status=$_POST['status'];
-$remark=$_POST['remark'];
-$query=mysqli_query($db,"insert into remark(frm_id,status,remark) values('$form_id','$status','$remark')");
-$sql=mysqli_query($db,"update users_orders set status='$status' where o_id='$form_id'");
 
-echo "<script>alert('Form Details Updated Successfully');</script>";
+    $form_id=$_GET['form_id'];
+    $status=$_POST['status'];
+    $remark=$_POST['remark'];
+
+
+        //////////////////////////
+
+        require "vendor/autoload.php";
+
+        $client = new GuzzleHttp\Client(); 
+    
+        $response = $client->request("POST", "https://api.sms.fortres.net/v1/messages", [
+            "headers" => [
+                "Content-type" => "application/json"
+            ],
+            "auth" => ["d27a92ea-d31c-46ed-8759-44592acad895", "5MD0KUAK3ANmeyYyu4gg0KeoOIuYsC9l3NDY77Mk"],
+            "json" => [
+                "recipient" => "09662062872",
+                "message" => "Sample text message"
+            ]
+        ]);
+    
+        if ($response->getStatusCode() == 200) {
+            echo $response->getBody();
+        }
+    
+    
+        /////////////////////////
+        
+    $query=mysqli_query($db,"insert into remark(frm_id,status,remark) values('$form_id','$status','$remark')");
+    $sql=mysqli_query($db,"update users_orders set status='$status' where o_id='$form_id'");
+
+    echo "<script>alert('Form Details Updated Successfully');</script>";
 
   }
 

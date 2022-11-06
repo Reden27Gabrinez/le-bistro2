@@ -171,29 +171,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-floating">
+                                    <input required name="pref_food" type="text" id="pref_food" placeholder="pref_food" class="form-control">
                                     <label for="pref_food">Preferred Food</label>
-                                    <select required name="pref_food" id="pref_food" placeholder="pref_food" class="form-control">
-                                            
-                                         
-                                        <?php
-                                            include("configuration/config.php");
-                                            $sql="SELECT * FROM dishes";
-                                            $query=mysqli_query($conn,$sql);
-                                            
-                                                if(!mysqli_num_rows($query) > 0 )
-                                                    {
-                                                        echo '<center>No Menu</center>';
-                                                    }
-                                                else
-                                                    {
-                                                        while($rows=mysqli_fetch_array($query))
-														{
-                                                            echo '<option value="'.$rows['title'].'">'.$rows['title'].'</option>';
-                                                        }
-                                                    }
-                                                
-                                        ?>
-									    </select>
                                 </div>
                             </div>
                             <div class="form-group">
