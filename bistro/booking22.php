@@ -21,6 +21,7 @@
 </head>
 <body>
 
+
 <nav class="navbar navbar-expand-custom navbar-mainbg justify-content-around" style="position: fixed; z-index: 1; width: 100%;"> 
         <div id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto d-inline">
@@ -64,7 +65,6 @@
         </div>
     </nav>
 
-
     
     <div class="container">
         <div class="row mb-5">
@@ -83,36 +83,9 @@
                                 <img src="image/bg1.png" alt="" width="50" height="50" class="my-2 float-end rounded-circle">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <?php
-                                    session_start();
-                                    error_reporting(0);
-                                    include_once("class.php");
-                                    if(strlen($_SESSION['userid']==0))
-                                    {
-                                        session_unset();
-                                        session_destroy();
-                                        echo '
-                                                <a href="register.php" class="dropdown-item" href="#">Sign up</a>
-                                                <a href="login.php" class="dropdown-item" href="#">Sign in</a>
-                                             ';
-                                        
-                                    }
-                                    else
-                                    {
-                                        echo '
-                                                <a class="dropdown-item bg-info" href="#">';
-                                                  echo $_SESSION['Name'];echo " "; echo $_SESSION['LName'];
-                                                   echo '</a>
-                                                   <a class="dropdown-item" href="profile.php">Profile</a>
-                                                   <a class="dropdown-item" href="your_orders.php">Order History</a>
-                                                   <a class="dropdown-item" href="change-password.php">Settings</a>
-                                                   <a class="dropdown-item" href="logout.php">Logout</a>
-                                             ';
-                                    }
-
-
-                                ?>
-                              </div>
+                                <a href="register.php" class="dropdown-item" href="#">Sign up</a>
+                                <a href="login.php" class="dropdown-item" href="#">Sign in</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,7 +126,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-floating">
-                                    <input readonly name="email" type="email" id="email" placeholder="Email" value="<?php echo $_SESSION['Email']; ?>" class="form-control">
+                                    <input required name="email" type="email" id="email" placeholder="Email" class="form-control">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
@@ -171,29 +144,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-floating">
+                                    <input required name="pref_food" type="text" id="pref_food" placeholder="pref_food" class="form-control">
                                     <label for="pref_food">Preferred Food</label>
-                                    <select required name="pref_food" id="pref_food" placeholder="pref_food" class="form-control">
-                                            
-                                         
-                                        <?php
-                                            include("configuration/config.php");
-                                            $sql="SELECT * FROM dishes";
-                                            $query=mysqli_query($conn,$sql);
-                                            
-                                                if(!mysqli_num_rows($query) > 0 )
-                                                    {
-                                                        echo '<center>No Menu</center>';
-                                                    }
-                                                else
-                                                    {
-                                                        while($rows=mysqli_fetch_array($query))
-														{
-                                                            echo '<option value="'.$rows['title'].'">'.$rows['title'].'</option>';
-                                                        }
-                                                    }
-                                                
-                                        ?>
-									    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -208,78 +160,8 @@
                                     <label for="person_no">No. of Person</label>
                                 </div>
                             </div>
-                            <input name="booking" type="submit" value="Book" class="btn btn-success float-end">
+                            <input name="booking2" type="submit" value="Book" class="btn btn-success float-end">
                         </form>
-
-                        <div class="table-responsive">
-                            <?php
-                                include_once('configuration/config.php');
-                                $name  = $_SESSION['Name'];
-                                $email= $_SESSION['Email'];
-                                $query = "SELECT * FROM book WHERE Name = '$name' OR Email = '$email' ";
-                                $stmt  = $conn->prepare($query);
-                                $stmt  -> execute();
-                                $result = $stmt->get_result();
-
-                            ?>
-                            <table class="table mt-5 table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">NAME</th>
-                                    <th scope="col">BOOK DATE</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                            <?php
-
-                                $counter = 0;
-                                while($row = $result->fetch_assoc())
-                                {
-                                    $counter++;
-                            ?>
-                                    <tr>
-                                        <th><?= $counter; ?></th>
-                                        <td><?= $row['Name']; ?></td>
-                                        <td><?= $row['Book_date']; ?></td>
-                                        <td>
-                                            <?php
-                                                if($row['Status'] == 0)
-                                                {
-                                            ?>
-                                                    <span class="badge bg-info">Pending</span>
-                                            <?php
-                                                }
-                                                elseif($row['Status'] == 1)
-                                                {
-                                            ?>
-                                                    <span class="badge bg-warning">Accepted</span>
-                                            <?php
-                                                }
-                                                else
-                                                {
-                                            ?>
-                                                    <span class="badge bg-success">Completed</span>
-                                            <?php
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                           <a href="class.php?delete_book=<?= $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete?');">
-                                                <span class="text-center"><i class="fa fa-trash"></i></span>
-                                           </a>
-                                        </td>
-                                    </tr>
-                            <?php
-                                }
-                                $stmt->close();
-
-                            ?>
-                                  
-                                </tbody>
-                            </table>
                     </div>
                     <div class="col-1"></div>
                 </div>
