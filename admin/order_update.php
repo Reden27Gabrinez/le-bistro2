@@ -15,6 +15,7 @@ else
     $form_id=$_GET['form_id'];
     $status=$_POST['status'];
     $remark=$_POST['remark'];
+    $phone=$_POST['num'];
 
 
         //////////////////////////
@@ -29,8 +30,8 @@ else
             ],
             "auth" => ["d27a92ea-d31c-46ed-8759-44592acad895", "5MD0KUAK3ANmeyYyu4gg0KeoOIuYsC9l3NDY77Mk"],
             "json" => [
-                "recipient" => "09662062872",
-                "message" => "Sample text message"
+                "recipient" => "$phone",
+                "message" => "$status"
             ]
         ]);
     
@@ -155,9 +156,8 @@ td, th {
       <td><?php echo htmlentities($_GET['form_id']); ?></td>
     </tr>
 	<tr>
-      <td  >&nbsp;</td>
-
-      <td >&nbsp;</td>
+      <td><b>Phone Number</b></td>
+      <td><input name="num" type="number" class="form-control"></td>
     </tr>
    
     <tr >

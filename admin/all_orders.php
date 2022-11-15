@@ -150,7 +150,8 @@ session_start();
                                     <table id="myTable" class="table table-bordered table-striped">
                                     <thead class="thead-dark">
                                             <tr>
-                                                <th>User</th>		
+                                                <th>User</th>	
+                                                <th>Phone</th>		
                                                 <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
@@ -181,6 +182,7 @@ session_start();
 																				<?php
 																					echo ' <tr>
 																					           <td>'.$rows['username'].'</td>
+																					           <td>'.$rows['phone'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['quantity'].'</td>
 																								<td> ₱'.$rows['price'].'</td>
