@@ -194,6 +194,7 @@ session_start();
                                 <div class="col-xs-12 col-sm-5 additional-info color-gray">
                                     <h5></h5>
                                    <!-- <p>Order us and let us prepare the best menu for you</p> -->
+                                   <a class="btn btn-success" href="application/Bistro.apk" download>Download an App</a>
                                 </div>
                     </div>
                 </div>

@@ -157,7 +157,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											
 											<tr>
 													<td><strong>Username:</strong></td>
-												    <td><center><?php echo $rows['username']; ?></center></td>
+												    <td><center><?php echo $rows['username']; ?> : <?php echo $rows['phone']; ?></center></td>
 													   <td><center>
 													   <a href="javascript:void(0);" onClick="popUpWindow('order_update.php?form_id=<?php echo htmlentities($rows['o_id']);?>');" title="Update order">
 															 <button type="button" class="btn btn-primary">Update Order Status</button></a>

@@ -14,6 +14,7 @@ if(isset($_POST['submit'] ))
         $name       = $_POST['name'];
         $book       = $_POST['book_date'];
         $status     = $_POST['stats'];
+        $phone2     = $_POST['phone2'];
 
         //////////////////////
         require "vendor/autoload.php";
@@ -24,10 +25,10 @@ if(isset($_POST['submit'] ))
             "headers" => [
                 "Content-type" => "application/json"
             ],
-            "auth" => ["client_id", "client_secret"],
+            "auth" => ["d27a92ea-d31c-46ed-8759-44592acad895", "5MD0KUAK3ANmeyYyu4gg0KeoOIuYsC9l3NDY77Mk"],
             "json" => [
-                "recipient" => "09123456789",
-                "message" => "Sample text message"
+                "recipient" => "$phone2",
+                "message" => "$book"
             ]
         ]);
 
@@ -209,7 +210,7 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <label class="control-label">Phone</label>
-                                                    <input readonly type="number" name="phone" class="form-control form-control-danger"  value="<?php  echo $newrow['Phone'];  ?>">
+                                                    <input readonly type="number" name="phone2" class="form-control form-control-danger"  value="<?php  echo $newrow['Phone'];  ?>">
                                                     </div>
                                             </div>
                                       
